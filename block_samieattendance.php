@@ -73,11 +73,13 @@ class block_samieattendance extends block_base {
         if ($PAGE->pagelayout != 'course') {
             $courseid = optional_param('courseid', null, PARAM_INT);
             if ($courseid != null) {
-                $this->content->text = html_writer::tag('a', 
+                $this->content->text = html_writer::tag('a',
                         get_string('gobacktocourse', 'block_samieattendance'),
                         array(
                             'href' => $CFG->wwwroot."/course/view.php?id=$courseid",
-                            'class' => 'btn btn-default'));
+                            'class' => 'btn btn-default'
+                        )
+                );
                 $this->content->text .= self::get_show_attendances_buttons($courseid);
             } else {
                 $this->content->text = get_string('accesstocoursemessage', 'block_samieattendance');
@@ -95,11 +97,13 @@ class block_samieattendance extends block_base {
                 require('block_samieattendance/samieattendance')
                     .toggle_samie_user_attendance('setAttendance', ".$COURSE->id.", ".$USER->id.", ".$today.")
             })();";
-            $out .= html_writer::tag('span', 
+            $out .= html_writer::tag('span',
                     get_string('callroll', 'block_samieattendance'),
                     array(
                         'onclick' => $onclickcode,
-                        'class'   => 'btn btn-default'));
+                        'class'   => 'btn btn-default'
+                    )
+            );
         } else {
             $out .= block_samieattendance_print_attendance_table($COURSE->id, $today);
             $out .= '<br>';
@@ -114,16 +118,20 @@ class block_samieattendance extends block_base {
      */
     private static function get_show_attendances_buttons($courseid) {
         global $CFG;
-        $result = html_writer::tag('a', 
+        $result = html_writer::tag('a',
                 get_string('showallattendance', 'block_samieattendance'),
                 array(
                     'href'  => $CFG->wwwroot.'/blocks/samieattendance/showattendances.php?courseid='.$courseid,
-                    'class' => 'btn btn-default'));
-        $result .= html_writer::tag('a', 
+                    'class' => 'btn btn-default'
+                )
+        );
+        $result .= html_writer::tag('a',
                 get_string('addtogradebook', 'block_samieattendance'),
                 array(
                     'href'  => $CFG->wwwroot.'/blocks/samieattendance/addtogradebook.php?courseid='.$courseid,
-                    'class' => 'btn btn-default'));
+                    'class' => 'btn btn-default'
+                )
+        );
         return $result;
     }
 
