@@ -91,7 +91,7 @@ define(['jquery'], function($) {
      * @param $attdate Attendance date
      */
     function reset_attendance (question, courseid, attdate) {
-        if (confirm(question)) {
+        if (window.confirm(question)) {
             $.ajax({
                 url: M.cfg.wwwroot + '/blocks/samieattendance/requests.php',
                 type: 'POST',
@@ -103,7 +103,7 @@ define(['jquery'], function($) {
                             window.location = window.location;
                             location.reload(true);
                         } else {
-                            alert('Error reseting roll call');
+                            window.alert('Error reseting roll call');
                         }
                         return;
                     } catch(ex) {
