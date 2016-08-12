@@ -17,6 +17,13 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Subversion
+.svn
+
+node_modules
+
+vendor
+
 # =========================
 # Operating System Files
 # =========================
@@ -45,3 +52,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+Gruntfile.js

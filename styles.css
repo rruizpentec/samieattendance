@@ -1,0 +1,8 @@
+.block_samieattendance .btn {
+    margin-top: 5px;
+    width: 93%;    
+}
+
+.block_samieattendance_toggleUserAttendance {
+    cursor: pointer;
+}
