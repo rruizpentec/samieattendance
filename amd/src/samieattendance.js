@@ -110,7 +110,7 @@ define(['jquery'], function($) {
                         // Debug: console.log(response);.
                     }
                 },
-                error: function(jqXHR, textStatus) {
+                error: function() {
                     // Debug: console.log('block_samieattendance_reset_user_attendance: ' + jqXHR.responseText);.
                     // Debug: var err = eval('(' + jqXHR.responseText + ')');.
                     // Debug: console.log(err.Message);.
