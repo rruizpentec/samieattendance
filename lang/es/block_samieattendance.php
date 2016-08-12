@@ -59,3 +59,5 @@ $string['teacher'] = 'Profesor';
 $string['gobacktocourse'] = 'Volver al curso';
 $string['accesstocoursemessage'] = 'Acceda a un curso para ver la lista de asistencia';
 $string['errorupdatingscores'] = 'Se han producido algunos errores al guardar la información sobre asistencia en el libro de calificaciones';
+$string['cancelcallroll'] = 'Cancelar control de asistencia de hoy';
+$string['cofirmcancelrollcall'] = '¿Desea cancelar el control de asistencia de hoy?';

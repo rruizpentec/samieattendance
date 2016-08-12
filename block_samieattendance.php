@@ -107,6 +107,17 @@ class block_samieattendance extends block_base {
         } else {
             $out .= block_samieattendance_print_attendance_table($COURSE->id, $today);
             $out .= '<br>';
+            $onclickcode = "(function() {
+                require('block_samieattendance/samieattendance')
+                    .reset_attendance('".get_string('cofirmcancelrollcall', 'block_samieattendance')."',".$COURSE->id.", ".$today.")
+            })();";
+            $out .= html_writer::tag('span',
+                    get_string('cancelcallroll', 'block_samieattendance'),
+                    array(
+                        'onclick' => $onclickcode,
+                        'class'   => 'btn btn-default'
+                    )
+            );
         }
         $out .= self::get_show_attendances_buttons($COURSE->id);
         $this->content->text .= $out;

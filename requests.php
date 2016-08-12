@@ -30,13 +30,16 @@ global $CFG, $DB, $USER;
 
 require_once(__DIR__ .'/lib.php');
 
-$aluid = required_param('alu_id', PARAM_INT);
+$action = required_param('action', PARAM_TEXT);
+$aluid = 0;
+if ($action == 'setAttendance' || $action == 'delAttendance') {
+    $aluid = required_param('alu_id', PARAM_INT);
+}
 $courseid = required_param('course_id', PARAM_INT);
 $asifecha = required_param('asi_fecha', PARAM_TEXT);
-$action = required_param('action', PARAM_TEXT);
 
 try {
-    if ($action == 'setAttendance' || $action == 'delAttendance') {
+    if ($action == 'setAttendance' || $action == 'delAttendance' || $action == 'resetAttendance') {
         $clause = ' timedate = :timedate AND courseid = :courseid AND userid = :userid';
         $transaction = $DB->start_delegated_transaction();
         $record = new stdClass();
@@ -60,18 +63,22 @@ try {
                 'timedate' => $asifecha,
                 'userid'   => $aluid,
                 'courseid' => $courseid));
+        } else if ($action == 'resetAttendance') {
+            $DB->delete_records('block_samieattendance_att', array(
+                'timedate' => $asifecha,
+                'courseid' => $courseid));
         }
+
         $samieconfig = get_config('package_samie');
         $baseurl = $samieconfig->baseurl;
         if (substr($baseurl, -1, 1) != '/') {
             $baseurl .= '/';
         }
-        if ($aluid != $USER->id) {
+        if ($aluid != $USER->id || $action == "resetAttendance") {
             $result = file_get_contents($baseurl.'inc/attendancerequests.php?action='. $action. '&alu_id='.
                     $aluid .'&course_id=' . $courseid . '&asi_fecha=' . block_samieattendance_format_machine_timedate($asifecha));
-            $result = 'OK';
         } else {
-            $result = 'OK';
+            $result = 'OK'; 
         }
         if (strcmp($result, 'OK') == 0) {
             $transaction->allow_commit();

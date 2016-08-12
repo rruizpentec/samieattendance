@@ -48,6 +48,7 @@ define(['jquery'], function($) {
     /**
      * Toggle user attendance information on SAMIE platform
      *
+     * @param string $action Action
      * @param int $courseid Course id
      * @param int $aluid User id
      * @param $attdate Attendance date
@@ -84,6 +85,41 @@ define(['jquery'], function($) {
     }
 
     /**
+     * Reset date attendances information on SAMIE platform
+     *
+     * @param int $courseid Course id
+     * @param $attdate Attendance date
+     */
+    function reset_attendance (question, courseid, attdate) {
+        if (confirm(question)) {
+            $.ajax({
+                url: M.cfg.wwwroot + '/blocks/samieattendance/requests.php',
+                type: 'POST',
+                async: true,
+                data: {action: 'resetAttendance', course_id: courseid, asi_fecha: attdate},
+                success: function(response) {
+                    try {
+                        if (response == 'OK') {
+                            window.location = window.location;
+                            location.reload(true);
+                        } else {
+                            alert('Error reseting roll call');
+                        }
+                        return;
+                    } catch(ex) {
+                        // Debug: console.log(response);.
+                    }
+                },
+                error: function(jqXHR, textStatus) {
+                    // Debug: console.log('block_samieattendance_reset_user_attendance: ' + jqXHR.responseText);.
+                    // Debug: var err = eval('(' + jqXHR.responseText + ')');.
+                    // Debug: console.log(err.Message);.
+                }
+            });
+        }
+    }
+
+    /**
      * Toggle user attendance information
      *
      * @param int $courseid Course id
@@ -99,6 +135,7 @@ define(['jquery'], function($) {
     }
 
     return {
+        reset_attendance: reset_attendance,
         toggle_samie_user_attendance: toggle_samie_user_attendance,
         toggle_user_attendance: toggle_user_attendance,
         init: function (userid) {

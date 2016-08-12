@@ -59,3 +59,5 @@ $string['teacher'] = 'Teacher';
 $string['gobacktocourse'] = 'Go back to course';
 $string['accesstocoursemessage'] = 'Access to a course in order to view its attendance list';
 $string['errorupdatingscores'] = 'There were some errors during updating scores';
+$string['cancelcallroll'] = 'Cancel today Roll Call';
+$string['cofirmcancelrollcall'] = 'Do you want to cancel today roll call?';
