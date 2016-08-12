@@ -78,7 +78,7 @@ try {
             $result = file_get_contents($baseurl.'inc/attendancerequests.php?action='. $action. '&alu_id='.
                     $aluid .'&course_id=' . $courseid . '&asi_fecha=' . block_samieattendance_format_machine_timedate($asifecha));
         } else {
-            $result = 'OK'; 
+            $result = 'OK';
         }
         if (strcmp($result, 'OK') == 0) {
             $transaction->allow_commit();
